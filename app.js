@@ -26,6 +26,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+/**
+
+// Routers
+const auth = require('./app/auth/endpoints/auth');
+app.use('/api/auth', require('./app/auth/router'));
+app.all('/api/v1/*', auth.authenticate, auth.getCurrentUser);
+
+const user = require('./app/user/router');
+app.use('/api/v1/user',auth.isUser, user);
+
+*/
+
 app.use('/', index);
 
 // catch 404 and forward to error handler

@@ -1,41 +1,49 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send({ title: 'Express' });
+const post = require('../endpoints/post');
+const category = require('../endpoints/category');
+const about = require('../endpoints/about');
+
+router.route('/').get(function (req, res) {
+    res.send({title: "Welcome to Miraje's blog API"});
 });
-/*
-app.get('/api/posts',postEndpoint.get);
-app.get('/api/post/:id',postEndpoint.getById);
-app.get('/api/post/get-by-category/:category_id',postEndpoint.getCategoriesPostbyID);
-app.post('/api/post', postEndpoint.post);
-app.put('/api/post', postEndpoint.update);
-app.delete('/api/post/:id', postEndpoint.delete);
+
+/**
+ *
+ *  Blog Post Endpoints
+ *
+ * **/
+router.route('/api/posts').get(post.GetPost);
+router.route('/api/post/:id').get(post.FindByID);
+router.route('/api/post/find_by_category/:category_id').get(post.FindByCategory);
+
+router.route('api/post/add_post').post(post.AddNewPost);
+router.route('api/post/update_post/:id').put(post.UpdatePost);
+router.route('api/post/delete_post/:id').delete(post.DeletePost);
 
 
-app.get('/api/posts/categories',CategoryEndpoint.get);
-app.get('/api/posts/categories-with-count',CategoryEndpoint.getWithCount);
-app.get('/api/posts/category-name-by-category-id',CategoryEndpoint.getCatNameWithcatId);
-app.post('/api/posts/categories', CategoryEndpoint.post);
-app.put('/api/posts/categories', CategoryEndpoint.update);
-app.delete('/api/posts/categories/:id', CategoryEndpoint.delete);
+/**
+ *  Category Endpoints
+ *
+ */
 
-app.get('/api/posts-categories/:id',CategoryEndpoint.postCategories);
+router.route('/api/category/get_categories').get(category.GetCategoies);
+router.route('/api/category/add_category').post(category.AddCategory);
+router.route('/api/category/update_category/:id').put(category.UpdateCategory);
+router.route('/api/category/delete_category/:id').delete(category.DeleteCategory);
 
 
-app.get('/api/TSC',TSCEndpoint.get);
-app.post('/api/TSC', TSCEndpoint.post);
-app.put('/api/TSC', TSCEndpoint.update);
-app.delete('/api/TSC', TSCEndpoint.delete);
+/**
+ *  About Endpoints
+ *
+ * */
 
-app.get('/api/about',    aboutEndpoint.get);
-app.post('/api/about',   aboutEndpoint.post);
-app.put('/api/about',    aboutEndpoint.update);
-app.delete('/api/about', aboutEndpoint.delete);
 
-app.get('/api/contact',    contactEndpoint.get);
-app.delete('/api/contact', contactEndpoint.delete);
+router.route('/api/about/get_about').get(about.GetAbout);
+router.route('/api/about/add_about').post(about.AddAbout);
+router.route('/api/about/update_about/:id').put(about.UpdateAbout);
+router.route('/api/about/delete_about/:id').delete(about.DeleteAbout);
 
-*/
+
 module.exports = router;
