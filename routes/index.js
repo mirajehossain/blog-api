@@ -16,7 +16,7 @@ router.route('/').get(function (req, res) {
  * **/
 router.route('/api/posts').get(post.GetPost);
 router.route('/api/post/:id').get(post.FindByID);
-router.route('/api/post/find_by_category/:category_id').get(post.FindByCategory);
+router.route('/api/post/find_by_category/:id').get(post.FindByCategory);
 
 router.route('/api/post/add_post').post(post.AddNewPost);
 router.route('/api/post/update_post/:id').put(post.UpdatePost);

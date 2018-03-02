@@ -72,11 +72,35 @@ post.DeletePost = (req, res) => {
 };
 
 post.FindByID = (req, res) => {
-
+    let id = req.params.id;
+    PostModel.findByID(id,function (error, result) {
+        if(error){
+            // throw new Error(error) ;
+            throw error;
+        } else {
+            res.json({
+                success:true,
+                message:"Search Operation Successful.",
+                data:result
+            });
+        }
+    })
 };
 
 post.FindByCategory = (req, res) => {
-
+    let id = req.params.id;
+    PostModel.findByCategory(id,function (error, result) {
+        if(error){
+            // throw new Error(error) ;
+            throw error;
+        } else {
+            res.json({
+                success:true,
+                message:"Search Operation Successful.",
+                data:result
+            });
+        }
+    })
 };
 
 

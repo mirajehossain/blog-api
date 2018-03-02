@@ -26,5 +26,14 @@ PostModel.deletePost = (id,callback) =>{
     let sql = "DELETE FROM "+table+" WHERE ID = "+id;
     db.query(sql, callback);
 };
+PostModel.findByID = (id,callback) =>{
+    let sql = "SELECT * FROM "+table+" WHERE ID = "+id;
+    db.query(sql, callback);
+};
+
+PostModel.findByCategory = (id,callback) =>{
+    let sql = "SELECT * FROM "+table+" WHERE category_id = "+id;
+    db.query(sql, callback);
+};
 
 module.exports = PostModel;
