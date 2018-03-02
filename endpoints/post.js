@@ -17,7 +17,7 @@ post.GetPost = (req, res) => {
 
 post.AddNewPost = (req, res) => {
 
-    let DataObject = {};
+    let DataObject =req.body;
     PostModel.addPost(DataObject,function (error,result, fields) {
         if(error)
             // throw new Error(error) ;
@@ -33,9 +33,9 @@ post.AddNewPost = (req, res) => {
 };
 
 post.UpdatePost = (req, res) => {
+
     let id = req.params.id;
     let data = req.body;
-    console.log(data);
 
     PostModel.updatePost(id,data,function (error,result,fields) {
         if(error){
@@ -56,6 +56,19 @@ post.UpdatePost = (req, res) => {
 
 post.DeletePost = (req, res) => {
 
+    let id = req.params.id;
+    PostModel.deletePost(id,function (error, result) {
+        if(error){
+            // throw new Error(error) ;
+            throw error;
+        } else {
+            res.json({
+                success:true,
+                message:"Post Deleted Successfully.",
+                data:result
+            });
+        }
+    })
 };
 
 post.FindByID = (req, res) => {
