@@ -1,7 +1,7 @@
 const db = require('../config/database').connection;
 
 const table = 'post';
-const columns = ['title','description','picture','category_id','author','date'];
+const columns = ['title','description','picture','author','date','category_id'];
 
 let PostModel = {};
 
@@ -19,10 +19,9 @@ PostModel.getPost = (callback) =>{
 };
 
 PostModel.updatePost = (id,dataOBJ,callback) =>{
-
     let data = Object.values(dataOBJ);
-    let sql = "UPDATE "+table+" SET "+columns.join("=  "+data.join(", ")+" ")+" WHERE ID = "+id;
-    db.query(sql, callback);
+    let sql = "UPDATE "+table+" SET "+columns.join("= ?, ")+"=? WHERE ID = "+id;
+    db.query(sql,data, callback);
 };
 
 module.exports = PostModel;
