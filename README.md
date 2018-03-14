@@ -4,6 +4,5 @@
 
  * npm install blog-api
 
-    ** How to use
-
-    ** Coming soon
+    * How to use
+       * Coming soon
