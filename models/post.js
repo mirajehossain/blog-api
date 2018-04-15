@@ -13,7 +13,7 @@ PostModel.addPost = (dataOBJ,callback)=>{
 };
 
 PostModel.getPost = (callback) =>{
-    let sql = "SELECT * FROM "+table;
+    let sql = "SELECT * FROM "+table +" ORDER BY post.id DESC";
     db.query(sql,callback)
 };
 
