@@ -3,14 +3,13 @@ const PostModel = require('../models/post');
 let post = {};
 
 post.GetPost = (req, res) => {
-    PostModel.getPost(function (error, result, fields) {
+    PostModel.getPost(function (error, result) {
         if(error){
             throw error;
         }
         res.json({
             success:true,
-            data:result,
-            fields:fields
+            data:result
         })
     })
 };
@@ -18,7 +17,7 @@ post.GetPost = (req, res) => {
 post.AddNewPost = (req, res) => {
 
     let DataObject =req.body;
-    PostModel.addPost(DataObject,function (error,result, fields) {
+    PostModel.addPost(DataObject,function (error,result) {
         if(error)
             // throw new Error(error) ;
             throw error;
@@ -26,8 +25,7 @@ post.AddNewPost = (req, res) => {
         res.json({
             success:true,
             message:"New Post added Successfully.",
-            data:result,
-            fields:fields
+            data:result
         });
     });
 };
@@ -37,7 +35,7 @@ post.UpdatePost = (req, res) => {
     let id = req.params.id;
     let data = req.body;
 
-    PostModel.updatePost(id,data,function (error,result,fields) {
+    PostModel.updatePost(id,data,function (error,result) {
         if(error){
         // throw new Error(error) ;
             throw error;
@@ -45,9 +43,7 @@ post.UpdatePost = (req, res) => {
         res.json({
             success:true,
             message:"Post Update Successfully.",
-            data:result,
-            fields:fields
-
+            data:result
             });
         }
     })
