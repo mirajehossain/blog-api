@@ -28,12 +28,12 @@ PostModel.deletePost = (id,callback) =>{
     db.query(sql, callback);
 };
 PostModel.findByID = (id,callback) =>{
-    let sql = "SELECT * FROM "+table+" WHERE ID = "+id;
+    let sql = "SELECT post.*, category.title as ctitle FROM "+table+" INNER JOIN category WHERE post.ID = "+id;
     db.query(sql, callback);
 };
 
 PostModel.findByCategory = (id,callback) =>{
-    let sql = "SELECT * FROM "+table+" WHERE category_id = "+id;
+    let sql = "SELECT post.*, category.title as ctitle FROM "+table+" INNER JOIN category WHERE post.category_id = "+id +" ORDER BY id DESC";
     db.query(sql, callback);
 };
 

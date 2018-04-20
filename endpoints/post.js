@@ -5,7 +5,11 @@ let post = {};
 post.GetPost = (req, res) => {
     PostModel.getPost(function (error, result) {
         if(error){
-            throw error;
+
+            res.json({
+                success:false,
+                data:error
+            });
         }
         res.json({
             success:true,
@@ -19,8 +23,10 @@ post.AddNewPost = (req, res) => {
     let DataObject =req.body;
     PostModel.addPost(DataObject,function (error,result) {
         if(error)
-            // throw new Error(error) ;
-            throw error;
+            res.json({
+                success:false,
+                data:error
+            });
 
         res.json({
             success:true,
@@ -37,8 +43,11 @@ post.UpdatePost = (req, res) => {
 
     PostModel.updatePost(id,data,function (error,result) {
         if(error){
-        // throw new Error(error) ;
-            throw error;
+            res.json({
+                success:false,
+                data:error
+            });
+
         } else {
         res.json({
             success:true,
@@ -55,8 +64,11 @@ post.DeletePost = (req, res) => {
     let id = req.params.id;
     PostModel.deletePost(id,function (error, result) {
         if(error){
-            // throw new Error(error) ;
-            throw error;
+            res.json({
+                success:false,
+                data:error
+            });
+
         } else {
             res.json({
                 success:true,
@@ -71,8 +83,11 @@ post.FindByID = (req, res) => {
     let id = req.params.id;
     PostModel.findByID(id,function (error, result) {
         if(error){
-            // throw new Error(error) ;
-            throw error;
+            res.json({
+                success:false,
+                data:error
+            });
+
         } else {
             res.json({
                 success:true,
@@ -87,8 +102,10 @@ post.FindByCategory = (req, res) => {
     let id = req.params.id;
     PostModel.findByCategory(id,function (error, result) {
         if(error){
-            // throw new Error(error) ;
-            throw error;
+            res.json({
+                success:false,
+                data:error
+            });
         } else {
             res.json({
                 success:true,

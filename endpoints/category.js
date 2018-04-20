@@ -4,10 +4,12 @@ let category = {};
 
 category.GetCategoies = (req, res) => {
     CategoryModel.getCategory(function (error, result) {
-        if(error)
-        // throw new Error(error) ;
-            throw error;
-
+        if(error){
+            res.json({
+                success:false,
+                data:error
+            });
+        }
         res.json({
             success:true,
             message:"Getting All Category Successfully.",
@@ -21,9 +23,13 @@ category.AddCategory = (req, res) => {
     let category = req.body;
     CategoryModel.addCategory(category,function (error, result) {
         if(error)
-        // throw new Error(error) ;
-            throw error;
+        {
+            res.json({
+                success:false,
+                data:error
+            });
 
+        }
         res.json({
             success:true,
             message:"New Category added Successfully.",
@@ -36,9 +42,12 @@ category.UpdateCategory = (req, res) => {
     let id = req.params.id;
     let category = req.body;
     CategoryModel.updateCategory(id,category,function (error, result) {
-        if(error)
-        // throw new Error(error) ;
-            throw error;
+        if (error){
+            res.json({
+            success: false,
+            data: error
+        });
+    }
 
         res.json({
             success:true,
@@ -52,9 +61,12 @@ category.UpdateCategory = (req, res) => {
 category.DeleteCategory = (req, res) => {
     let id = req.params.id;
     CategoryModel.deleteCategory(id,function (error, result) {
-        if(error)
-        // throw new Error(error) ;
-            throw error;
+        if(error){
+            res.json({
+                success:false,
+                data:error
+            });
+        }
 
         res.json({
             success:true,
