@@ -5,9 +5,10 @@ let about= {};
 about.GetAbout =  (req, res) => {
     AboutModel.getAbout(function (error, result) {
         if(error)
-        // throw new Error(error) ;
-            throw error;
-
+            res.json({
+                success:false,
+                data:error
+            });
         res.json({
             success:true,
             message:"Getting data Successfully.",
@@ -21,12 +22,13 @@ about.AddAbout = (req, res) => {
     let about = req.body;
     AboutModel.addAbout(about,function (error, result) {
         if(error)
-        // throw new Error(error) ;
-            throw error;
-
+            res.json({
+                success:false,
+                data:error
+            });
         res.json({
             success:true,
-            message:"Getting data Successfully.",
+            message:"Add about data Successfully.",
             data:result
         });
     })
@@ -36,11 +38,13 @@ about.UpdateAbout = (req, res) => {
 
     let id= req.params.id;
     let data = req.body;
+    delete data.id;
     AboutModel.updateAbout(id,data,function (error, result) {
         if(error)
-        // throw new Error(error) ;
-            throw error;
-
+            res.json({
+                success:false,
+                data:error
+            });
         res.json({
             success:true,
             message:"About Updated Successfully.",
@@ -53,10 +57,10 @@ about.DeleteAbout = (req, res) => {
 
     let id= req.params.id;
     AboutModel.deleteAbout(id,function (error, result) {
-        if(error)
-        // throw new Error(error) ;
-            throw error;
-
+        res.json({
+            success:false,
+            data:error
+        });
         res.json({
             success:true,
             message:"Delete about Successfully.",
