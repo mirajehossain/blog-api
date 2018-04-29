@@ -40,7 +40,7 @@ post.UpdatePost = (req, res) => {
 
     let id = req.params.id;
     let data = req.body;
-
+    delete data.id;
     PostModel.updatePost(id,data,function (error,result) {
         if(error){
             res.json({
