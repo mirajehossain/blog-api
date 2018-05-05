@@ -33,7 +33,8 @@ PostModel.findByID = (id,callback) =>{
 };
 
 PostModel.findByCategory = (id,callback) =>{
-    let sql = "SELECT post.*, category.title as ctitle FROM "+table+" INNER JOIN category WHERE post.category_id = "+id +" ORDER BY id DESC";
+    let sql = "SELECT post.*, category.title as ctitle FROM "+table+
+        " INNER JOIN category WHERE post.category_id = "+id +" AND category.id = "+id + " ORDER BY id DESC";
     db.query(sql, callback);
 };
 
