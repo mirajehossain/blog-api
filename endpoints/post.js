@@ -1,20 +1,14 @@
 const PostModel = require('../models/post');
-
+const Response = require('../helper/response');
 let post = {};
 
 post.GetPost = (req, res) => {
     PostModel.getPost(function (error, result) {
         if(error){
-
-            res.json({
-                success:false,
-                data:error
-            });
+            res.json(Response.Error(false, error));
+        } else {
+            res.json(Response.Success(true,result,'Get Post'));
         }
-        res.json({
-            success:true,
-            data:result
-        })
     })
 };
 
@@ -22,17 +16,11 @@ post.AddNewPost = (req, res) => {
 
     let DataObject =req.body;
     PostModel.addPost(DataObject,function (error,result) {
-        if(error)
-            res.json({
-                success:false,
-                data:error
-            });
-
-        res.json({
-            success:true,
-            message:"New Post added Successfully.",
-            data:result
-        });
+        if(error){
+            res.json(Response.Error(false, error));
+        } else {
+            res.json(Response.Success(true,result, "New Post added Successfully." ));
+        }
     });
 };
 
@@ -43,18 +31,11 @@ post.UpdatePost = (req, res) => {
     delete data.id;
     PostModel.updatePost(id,data,function (error,result) {
         if(error){
-            res.json({
-                success:false,
-                data:error
-            });
-
+            res.json(Response.Error(false, error));
         } else {
-        res.json({
-            success:true,
-            message:"Post Update Successfully.",
-            data:result
-            });
+            res.json(Response.Success(true,result, "Post Update Successfully." ));
         }
+
     })
 };
 
@@ -64,18 +45,11 @@ post.DeletePost = (req, res) => {
     let id = req.params.id;
     PostModel.deletePost(id,function (error, result) {
         if(error){
-            res.json({
-                success:false,
-                data:error
-            });
-
+            res.json(Response.Error(false, error));
         } else {
-            res.json({
-                success:true,
-                message:"Post Deleted Successfully.",
-                data:result
-            });
+            res.json(Response.Success(true,result, "Post Delete Successfully." ));
         }
+
     })
 };
 
@@ -83,18 +57,11 @@ post.FindByID = (req, res) => {
     let id = req.params.id;
     PostModel.findByID(id,function (error, result) {
         if(error){
-            res.json({
-                success:false,
-                data:error
-            });
-
+            res.json(Response.Error(false, error));
         } else {
-            res.json({
-                success:true,
-                message:"Search Operation Successful.",
-                data:result
-            });
+            res.json(Response.Success(true,result, "Successfully found." ));
         }
+
     })
 };
 
@@ -102,16 +69,9 @@ post.FindByCategory = (req, res) => {
     let id = req.params.id;
     PostModel.findByCategory(id,function (error, result) {
         if(error){
-            res.json({
-                success:false,
-                data:error
-            });
+            res.json(Response.Error(false, error));
         } else {
-            res.json({
-                success:true,
-                message:"Search Operation Successful.",
-                data:result
-            });
+            res.json(Response.Success(true,result, "Successfully fIND by category." ));
         }
     })
 };
