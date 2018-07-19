@@ -12,9 +12,9 @@ PostModel.addPost = (dataOBJ,callback)=>{
     db.query(sql, object,callback);
 };
 
-PostModel.getPost = (callback) =>{
+PostModel.getPost = (obj,callback) =>{
     let sql = "SELECT post.* , category.title as ctitle FROM "+table +
-        " LEFT JOIN category on post.category_id = category.id WHERE post.id >0 AND post.id<=5 ORDER BY post.id DESC";
+        " LEFT JOIN category on post.category_id = category.id WHERE post.id >"+ obj.start+ " AND post.id<="+ obj.end+ " ORDER BY post.id DESC";
     db.query(sql,callback)
 };
 
@@ -29,7 +29,7 @@ PostModel.deletePost = (id,callback) =>{
     db.query(sql, callback);
 };
 PostModel.findByID = (id,callback) =>{
-    let sql = "SELECT post.*, category.title as ctitle FROM "+table+" INNER JOIN category WHERE post.ID = "+id;
+    let sql = "SELECT post.*, category.title as ctitle FROM "+table+" INNER JOIN category ON post.category_id = category.id  WHERE post.ID = "+id;
     db.query(sql, callback);
 };
 

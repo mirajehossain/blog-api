@@ -3,7 +3,11 @@ const Response = require('../helper/response');
 let post = {};
 
 post.GetPost = (req, res) => {
-    PostModel.getPost(function (error, result) {
+    let pagination = {
+        start: req.body.start || 1,
+        end: req.body.end || 10
+    }
+    PostModel.getPost(pagination,function (error, result) {
         if(error){
             res.json(Response.Error(false, error));
         } else {
