@@ -12,9 +12,9 @@ PostModel.addPost = (dataOBJ,callback)=>{
     db.query(sql, object,callback);
 };
 
-PostModel.getPost = (obj,callback) =>{
+PostModel.getPost = (callback) =>{
     let sql = "SELECT post.* , category.title as ctitle FROM "+table +
-        " LEFT JOIN category on post.category_id = category.id WHERE post.id >"+ obj.start+ " AND post.id<="+ obj.end+ " ORDER BY post.id DESC";
+        " LEFT JOIN category on post.category_id = category.id ORDER BY post.id DESC";
     db.query(sql,callback)
 };
 
