@@ -14,7 +14,7 @@ const app = express();
 // };
 
 
-const options = {
+/*const options = {
     explorer : true,
     swaggerDefinition: {
         info: {
@@ -36,7 +36,7 @@ const options = {
         basePath: '/'
     },
     apis: ['./routes/index.js']
-}
+}*/
 
 
 app.use(function(req, res, next) {
@@ -65,7 +65,7 @@ const user = require('./app/user/router');
 app.use('/api/v1/user',auth.isUser, user);
 
 */
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.use('/', index);
