@@ -5,7 +5,38 @@ const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 const app = express();
+// let options = {
+//     explorer : true
+// };
+
+
+const options = {
+    explorer : true,
+    swaggerDefinition: {
+        info: {
+            title: 'REST - Swagger',
+            version: '1.0.0',
+            description: 'REST API with Swagger doc',
+            contact: {
+                email: 'contact@danielpecos.com'
+            }
+        },
+        tags: [
+            {
+                name: 'stocks',
+                description: 'Stocks API'
+            }
+        ],
+        schemes: ['http'],
+        host: 'localhost:3000',
+        basePath: '/'
+    },
+    apis: ['./routes/index.js']
+}
 
 
 app.use(function(req, res, next) {
@@ -34,6 +65,8 @@ const user = require('./app/user/router');
 app.use('/api/v1/user',auth.isUser, user);
 
 */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+
 
 app.use('/', index);
 
