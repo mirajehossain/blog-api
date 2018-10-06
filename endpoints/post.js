@@ -1,5 +1,6 @@
 const PostModel = require('../models/post');
 const Response = require('../helper/response');
+const path = require('path');
 let post = {};
 
 post.GetPost = (req, res) => {
@@ -23,6 +24,18 @@ post.AddNewPost = (req, res) => {
             res.json(Response.Success(true,result, "New Post added Successfully." ));
         }
     });
+};
+post.ImageUpload= (req, res, next) => {
+    console.log(req.headers.host);
+    let imagepath= req.file.originalname;
+    let sourcePath = path.join(req.headers.host+`/static/${imagepath}`);
+    console.log(imagepath);
+    res.send({
+        success:true,
+        link: sourcePath,
+        message: 'image uploaded'
+    });
+    // next();
 };
 
 post.UpdatePost = (req, res) => {

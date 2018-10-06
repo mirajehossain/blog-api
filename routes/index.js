@@ -1,9 +1,13 @@
 const express = require('express');
+
+
 const router = express.Router();
+const upload_image = require('../helper/image.upload');
 
 const post = require('../endpoints/post');
 const category = require('../endpoints/category');
 const about = require('../endpoints/about');
+
 
 router.route('/').get(function (req, res) {
     res.send({title: "Welcome to Miraje's blog API"});
@@ -19,6 +23,9 @@ router.route('/api/post/:id').get(post.FindByID);
 router.route('/api/post/find_by_category/:id').get(post.FindByCategory);
 
 router.route('/api/post/add_post').post(post.AddNewPost);
+router.route('/api/post/image_upload').post(upload_image.single('img'), post.ImageUpload);
+
+
 router.route('/api/post/update_post/:id').put(post.UpdatePost);
 router.route('/api/post/delete_post/:id').delete(post.DeletePost);
 
