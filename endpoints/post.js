@@ -28,8 +28,8 @@ post.AddNewPost = (req, res) => {
 post.ImageUpload= (req, res, next) => {
     console.log(req.headers.host);
     let imagepath= req.file.originalname;
-    let sourcePath = path.join(req.headers.host+`/static/${imagepath}`);
-    console.log(imagepath);
+    let sourcePath = 'http://'+path.join(req.headers.host+`/static/${imagepath}`);
+    console.log(sourcePath);
     res.send({
         success:true,
         link: sourcePath,
