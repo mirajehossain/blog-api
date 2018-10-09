@@ -1,14 +1,15 @@
 const db = require('../config/database').connection;
 
 const table = 'post';
-const columns = ['title','category_id','author','date','description','picture'];
+// const columns = ['title','category_id','author','date','description','picture'];
+const columns = ['title','category_id','author','date','description'];
 
 let PostModel = {};
 
 PostModel.addPost = (dataOBJ,callback)=>{
     let object = Object.values(dataOBJ);
     console.log(object);
-    let sql = "INSERT INTO "+table+ " ( "+columns.join(", ") +" ) VALUES (?,?,?,?,?,?)";
+    let sql = "INSERT INTO "+table+ " ( "+columns.join(", ") +" ) VALUES (?,?,?,?,?)";
     db.query(sql, object,callback);
 };
 
