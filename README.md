@@ -14,9 +14,9 @@ npm start
 ```
 
 
-## API endpoints
+## APIs 
 
-* Posts endpoints
+### Posts endpoints
    * GET
       * /api/posts
       * /api/post/:id
@@ -28,7 +28,7 @@ npm start
    * DELETE
       * /api/post/delete_post/:id
       
-* Category endpoints
+### Category endpoints
    * GET
       * /api/category/get_categories
    * POST
@@ -37,7 +37,7 @@ npm start
       * /api/category/update_category/:id
    * DELETE
       * /api/category/delete_category/:id
-*  About endpoints
+###  About endpoints
    * GET
       * /api/about/get_about
    * POST
