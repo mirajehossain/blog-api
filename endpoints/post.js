@@ -63,7 +63,6 @@ post.DeletePost = (req, res) => {
         } else {
             res.json(Response.Success(true,result, "Post Delete Successfully." ));
         }
-
     })
 };
 
