@@ -28,6 +28,7 @@ router.route('/api/post/image_upload').post(upload_image.single('img'), post.Ima
 
 router.route('/api/post/update_post/:id').put(post.UpdatePost);
 router.route('/api/post/delete_post/:id').delete(post.DeletePost);
+router.route('/api/post/search').post(post.SearchPost);
 
 
 /**

@@ -29,6 +29,11 @@ PostModel.deletePost = (id,callback) =>{
     let sql = "DELETE FROM "+table+" WHERE ID = "+id;
     db.query(sql, callback);
 };
+
+PostModel.searchPost = (string,callback) =>{
+    let sql =  `SELECT * FROM ${table} WHERE title LIKE '${string}%'`;
+    db.query(sql, callback);
+};
 PostModel.findByID = (id,callback) =>{
     let sql = "SELECT post.*, category.title as ctitle FROM "+table+" INNER JOIN category ON post.category_id = category.id  WHERE post.ID = "+id;
     db.query(sql, callback);

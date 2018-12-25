@@ -67,6 +67,19 @@ post.DeletePost = (req, res) => {
     })
 };
 
+post.SearchPost = (req, res) => {
+
+    let string = req.body.string;
+    PostModel.searchPost(string,function (error, result) {
+        if(error){
+            res.json(Response.Error(false, error));
+        } else {
+            res.json(Response.Success(true,result, "Search posts here." ));
+        }
+
+    })
+};
+
 post.FindByID = (req, res) => {
     let id = req.params.id;
     PostModel.findByID(id,function (error, result) {
