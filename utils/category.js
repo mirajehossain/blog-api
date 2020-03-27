@@ -1,30 +1,21 @@
-const db = require('../config/database');
-
-const table = 'category';
-const columns = ['title'];
+const knex = require('../db/config/knex');
 
 const CategoryModel = {};
 
 CategoryModel.addCategory = async (dataOBJ) => {
-  const object = Object.values(dataOBJ);
-  const sql = `INSERT INTO ${table} ( ${columns.join(', ')} ) VALUES (?)`;
-  return await db.query(sql, object);
+  return await knex('categories').insert(dataOBJ);
 };
 
 CategoryModel.getCategory = async () => {
-  const sql = `SELECT * FROM ${table}`;
-  return await db.query(sql);
+  return await knex('categories').select();
 };
 
 CategoryModel.updateCategory = async (id, dataOBJ) => {
-  const data = Object.values(dataOBJ);
-  const sql = `UPDATE ${table} SET ${columns.join('= ?, ')}=? WHERE ID = ${id}`;
-  return await db.query(sql, data);
+  return await knex('categories').update(dataOBJ).where({ id });
 };
 
 CategoryModel.deleteCategory = async (id) => {
-  const sql = `DELETE FROM ${table} WHERE ID = ${id}`;
-  return await db.query(sql);
+  return await knex('categories').delete().where({ id });
 };
 
 module.exports = CategoryModel;
