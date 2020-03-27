@@ -6,7 +6,7 @@ exports.up = knex => knex.schema.createTable('posts', (t) => {
   t.string('category_slug').notNullable();
   t.string('slug').notNullable();
   t.string('author').notNullable();
-  t.integer('counter').notNullable();
+  t.integer('counter').notNullable().defaultTo(0);
   t.boolean('isActive').defaultTo(false);
   t.timestamp('created_at').defaultTo(knex.fn.now());
   t.timestamp('updated_at').defaultTo(knex.fn.now());

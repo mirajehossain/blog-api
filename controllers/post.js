@@ -61,17 +61,18 @@ post.DeletePost = async (req, res) => {
 post.SearchPost = async (req, res) => {
   try {
     const { string } = req.body;
-    const posts = PostModel.searchPost(string);
+    const posts = await PostModel.searchPost(string);
+    console.log('search: ', posts);
     return res.send(Response.Success(true, posts, 'Search posts here.'));
   } catch (e) {
     return res.send(Response.Error(false, 'An error occur'));
   }
 };
 
-post.FindByID = async (req, res) => {
+post.FindBySlug = async (req, res) => {
   try {
-    const { id } = req.params;
-    const response = await PostModel.findByID(id);
+    const { slug } = req.params;
+    const response = await PostModel.findBySlug(slug);
     return res.send(Response.Success(true, response, 'Successfully found.'));
   } catch (e) {
     return res.send(Response.Error(false, 'An error occur'));
@@ -80,8 +81,8 @@ post.FindByID = async (req, res) => {
 
 post.FindByCategory = async (req, res) => {
   try {
-    const { id } = req.params;
-    const result = await PostModel.findByCategory(id);
+    const { slug } = req.params;
+    const result = await PostModel.findByCategory(slug);
     return res.send(Response.Success(true, result, 'Successfully fIND by category.'));
   } catch (e) {
     return res.send(Response.Error(false, 'An error occur'));
