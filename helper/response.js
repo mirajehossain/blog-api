@@ -5,9 +5,10 @@ const Response = {
     this.data = data || [];
     return this;
   },
-  Error(isSuccess, message) {
+  Error(isSuccess, message, error) {
     this.success = isSuccess;
     this.message = message;
+    this.error = error;
     return this;
   },
 };

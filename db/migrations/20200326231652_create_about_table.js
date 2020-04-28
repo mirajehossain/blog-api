@@ -1,6 +1,6 @@
 
 exports.up = knex => knex.schema.createTable('about', (t) => {
-  t.increments('id');
+  t.increments('id').unique();
   t.string('title').notNullable();
   t.string('description').notNullable();
   t.string('subtitle').notNullable();

@@ -1,10 +1,10 @@
 
 exports.up = knex => knex.schema.createTable('posts', (t) => {
-  t.increments('id').primary();
+  t.increments('id').notNullable().primary().unique();
   t.string('title').notNullable();
   t.text('description').notNullable();
   t.string('category_slug').notNullable();
-  t.string('slug').notNullable();
+  t.string('slug').notNullable().unique();
   t.string('author').notNullable();
   t.integer('counter').notNullable().defaultTo(0);
   t.boolean('isActive').defaultTo(false);

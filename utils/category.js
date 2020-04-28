@@ -1,8 +1,10 @@
+const slugify = require('slugify');
 const knex = require('../db/config/knex');
 
 const CategoryModel = {};
 
 CategoryModel.addCategory = async (dataOBJ) => {
+  dataOBJ.slug = `${slugify(dataOBJ.title.toLowerCase())}-${Math.floor(Math.random() * 90000) + 10000}`;
   return await knex('categories').insert(dataOBJ);
 };
 

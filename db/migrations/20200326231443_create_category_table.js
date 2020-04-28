@@ -1,6 +1,6 @@
 
 exports.up = knex => knex.schema.createTable('categories', (t) => {
-  t.increments('id');
+  t.increments('id').unique();
   t.string('title').notNullable();
   t.string('slug').notNullable().unique();
   t.boolean('isActive').defaultTo(false);

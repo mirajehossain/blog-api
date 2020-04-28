@@ -13,6 +13,11 @@ npm install
 npm start
 ```
 
+```markdown
+ migration command-> knex migrate:latest --env development
+ seed command->  knex seed:run --specific=01_categories.js
+```
+
 
 ## APIs 
 

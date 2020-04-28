@@ -6,7 +6,8 @@ const post = {};
 
 post.GetPost = async (req, res) => {
   try {
-    const posts = await PostModel.getPost();
+    const { page } = req.query;
+    const posts = await PostModel.getPost(page);
     return res.send(Response.Success(true, posts, 'Get all posts'));
   } catch (e) {
     return res.send(Response.Error(false, 'An error occur'));
@@ -19,7 +20,7 @@ post.AddNewPost = async (req, res) => {
     const response = await PostModel.addPost(DataObject);
     return res.send(Response.Success(true, response, 'New Post added Successfully.'));
   } catch (e) {
-    return res.send(Response.Error(false, 'An error occur'));
+    return res.send(Response.Error(false, 'An error occur', e));
   }
 };
 post.ImageUpload = (req, res) => {
@@ -75,7 +76,19 @@ post.FindBySlug = async (req, res) => {
     const response = await PostModel.findBySlug(slug);
     return res.send(Response.Success(true, response, 'Successfully found.'));
   } catch (e) {
-    return res.send(Response.Error(false, 'An error occur'));
+    console.log(e.message);
+    return res.send(Response.Error(false, 'An error occur', e));
+  }
+};
+
+post.MostPopularPost = async (req, res) => {
+  try {
+    const response = await PostModel.mostPopularPost();
+    console.log('response:-------', response)
+    return res.send(Response.Success(true, response, 'Successfully found.......'));
+  } catch (e) {
+    console.log(e.message);
+    return res.send(Response.Error(false, 'An error occur', e));
   }
 };
 

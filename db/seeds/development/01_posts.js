@@ -3,7 +3,6 @@ exports.seed = knex => knex('posts').del()
   // Inserts seed entries
   .then(() => knex('posts').insert([
     {
-      id: 1,
       title: 'fodark',
       description: 'Lorem ipsum description lodder summit the lazy dog',
       category_slug: 'javascript',
@@ -13,7 +12,6 @@ exports.seed = knex => knex('posts').del()
       author: 'Miraje',
     },
     {
-      id: 2,
       title: 'fodark 2',
       description: 'Lorem ipsum description lodder summit the lazy dog, Lorem ipsum description lodder summit the lazy dog, Lorem ipsum description lodder summit the lazy dog, Lorem ipsum description lodder summit the lazy dog',
       category_slug: 'javascript',

@@ -17,6 +17,7 @@ router.route('/').get((req, res) => res.send({ title: "Welcome to Miraje's blog 
  *
  * * */
 router.route('/api/posts').get(post.GetPost);
+router.route('/api/post/most-popular-post').get(post.MostPopularPost);
 router.route('/api/post/:slug').get(post.FindBySlug);
 router.route('/api/post/find-by-category/:slug').get(post.FindByCategory);
 
