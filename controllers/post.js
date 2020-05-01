@@ -10,7 +10,7 @@ post.GetPost = async (req, res) => {
     const posts = await PostModel.getPost(page);
     return res.send(Response.Success(true, posts, 'Get all posts'));
   } catch (e) {
-    return res.send(Response.Error(false, 'An error occur'));
+    return res.send(Response.Error(false, `${e.message}`, `${e}`));
   }
 };
 
@@ -55,7 +55,7 @@ post.DeletePost = async (req, res) => {
     const response = await PostModel.deletePost(id);
     return res.send(Response.Success(true, response, 'Post Delete Successfully.'));
   } catch (e) {
-    return res.send(Response.Error(false, 'An error occur'));
+    return res.send(Response.Error(false, `${e.message}`, `${e}`));
   }
 };
 
@@ -66,7 +66,7 @@ post.SearchPost = async (req, res) => {
     console.log('search: ', posts);
     return res.send(Response.Success(true, posts, 'Search posts here.'));
   } catch (e) {
-    return res.send(Response.Error(false, 'An error occur'));
+    return res.send(Response.Error(false, `${e.message}`, `${e}`));
   }
 };
 
@@ -77,7 +77,7 @@ post.FindBySlug = async (req, res) => {
     return res.send(Response.Success(true, response, 'Successfully found.'));
   } catch (e) {
     console.log(e.message);
-    return res.send(Response.Error(false, 'An error occur', e));
+    return res.send(Response.Error(false, `${e.message}`, `${e}`));
   }
 };
 

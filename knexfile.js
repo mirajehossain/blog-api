@@ -11,6 +11,7 @@ module.exports = {
   },
   development: {
     client: 'mysql',
+    //   connection: 'mysql://ihubcomb_newuser:Amirajehossain@127.0.0.1/ihubcomb_blog_db',
     connection: {
       host: '127.0.0.1',
       user: 'root',
@@ -26,7 +27,12 @@ module.exports = {
   },
   production: {
     client: 'mysql',
-    connection: process.env.DATABASE_URL,
+    connection: {
+      host: '127.0.0.1',
+      user: 'ihubcomb_newuser',
+      password: 'Amirajehossain',
+      database: 'ihubcomb_blog_db',
+    },
     migrations: {
       directory: `${__dirname}/db/migrations`,
     },

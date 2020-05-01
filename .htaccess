@@ -1,0 +1,7 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/ihubcomb/blogapi.mirajehossain.com"
+PassengerBaseURI "/"
+PassengerNodejs "/home/ihubcomb/nodevenv/blogapi.mirajehossain.com/10/bin/node"
+PassengerAppType node
+PassengerStartupFile bin/www
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
