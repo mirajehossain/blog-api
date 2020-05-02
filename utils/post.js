@@ -14,7 +14,11 @@ PostModel.getPost = async (page = 1, limit = 10) => {
   try {
     const count = await knex.from('posts').count({ title: 'title' });
     const totalPage = Math.ceil(count[0].title / 10);
-    const posts = await knex.select().from('posts').orderBy('created_at', 'desc').offset((page - 1) * limit).limit(limit);
+    const posts = await knex.select('posts.*', ' categories.title as category_title').from('posts')
+      .innerJoin('categories', 'posts.category_slug', '=', 'categories.slug')
+      .orderBy('created_at', 'desc')
+      .offset((page - 1) * limit)
+      .limit(limit);
     return {
       posts,
       count: count[0].title,
@@ -24,7 +28,7 @@ PostModel.getPost = async (page = 1, limit = 10) => {
       totalPage,
     };
   } catch (e) {
-    return e;
+    throw e;
   }
 };
 
@@ -45,14 +49,18 @@ PostModel.deletePost = async id => await knex('posts')
   .where({ id });
 
 PostModel.searchPost = async string => await knex('posts')
-  .where('title', 'like', `%${string}%`);
+  .select('posts.*', 'categories.title as category_title')
+  .where('posts.title', 'like', `%${string}%`)
+  .innerJoin('categories', 'posts.category_slug', '=', 'categories.slug');
 
 PostModel.findBySlug = async slug => await knex('posts')
-  .select()
-  .where({ slug });
+  .select('posts.*', 'categories.title as category_title')
+  .where({ 'posts.slug': slug })
+  .innerJoin('categories', 'posts.category_slug', '=', 'categories.slug');
 
 PostModel.findByCategory = async slug => await knex('posts')
-  .select()
-  .where({ category_slug: slug });
+  .select('posts.*', 'categories.title as category_title')
+  .where({ 'posts.category_slug': slug })
+  .innerJoin('categories', 'posts.category_slug', '=', 'categories.slug');
 
 module.exports = PostModel;
